@@ -1,0 +1,14 @@
+C:\Users\Administrator\Desktop\WPE\WPE\bin\Debug\WPE.exe
+C:\Users\Administrator\Desktop\WPE\WPE\bin\Debug\WPE.pdb
+C:\Users\Administrator\Desktop\WPE\WPE\obj\x86\Debug\WPE.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\WPE\WPE\obj\x86\Debug\WPE.MainForm.resources
+C:\Users\Administrator\Desktop\WPE\WPE\obj\x86\Debug\WPE.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\WPE\WPE\obj\x86\Debug\WPE.exe
+C:\Users\Administrator\Desktop\WPE\WPE\obj\x86\Debug\WPE.pdb
+C:\Users\ifwz\Desktop\wpe-master\WPE\WPE\obj\x86\Debug\WPE.csprojResolveAssemblyReference.cache
+C:\Users\ifwz\Desktop\wpe-master\WPE\WPE\obj\x86\Debug\WPE.MainForm.resources
+C:\Users\ifwz\Desktop\wpe-master\WPE\WPE\obj\x86\Debug\WPE.csproj.GenerateResource.Cache
+C:\Users\ifwz\Desktop\wpe-master\WPE\WPE\bin\Debug\小风车.exe
+C:\Users\ifwz\Desktop\wpe-master\WPE\WPE\bin\Debug\小风车.pdb
+C:\Users\ifwz\Desktop\wpe-master\WPE\WPE\obj\x86\Debug\小风车.exe
+C:\Users\ifwz\Desktop\wpe-master\WPE\WPE\obj\x86\Debug\小风车.pdb
