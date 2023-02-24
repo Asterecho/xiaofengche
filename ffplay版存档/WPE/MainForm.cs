@@ -7,7 +7,6 @@
  * 要改变这种模板请点击 工具|选项|代码编写|编辑标准头文件
  */
 using System;
-using System.Reflection;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,82 +37,25 @@ namespace WPE
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
-			string wppath=Directory.GetCurrentDirectory()+"\\wallpaper";
-			if (Directory.Exists(wppath))
-		    {
-				string t=File.ReadAllText(Directory.GetCurrentDirectory()+"\\mpv\\wp.txt");
-		 		Process.Start("mpv.exe ", " ./wallpaper/"+t);
-		 	//	MessageBox.Show(Process.GetCurrentProcess().Id.ToString());
-				Thread.Sleep(1000);
-				this.play();
-				this.Visible=false;
-				base.WindowState = FormWindowState.Minimized;
-				
-				flag=true;
-				this.notifyIcon1.Visible = true;
-		    }
-		    else
-		    {
-		        DirectoryInfo directoryInfo = new DirectoryInfo(wppath);
-		        directoryInfo.Create();
-		    }
-		    makelist(wppath);
-		    
-		    
-			
+			Process.Start("ffplay.exe ", " *.mp4 -an  -loop 0  -fs");
+			Thread.Sleep(1000);
+			this.play();
+			base.WindowState = FormWindowState.Minimized;
+			flag=true;
+			this.notifyIcon1.Visible = true;
 			
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
 		}
-		
-		
-		
-		public  void makelist(string path){
-		 
- 			DirectoryInfo root = new DirectoryInfo(path);
-  			FileInfo[] files=root.GetFiles();
-  			for (int i = 0; i < files.Length; i++) {
-  				ToolStripItem item = new ToolStripMenuItem();
-  				item.Text=Path.GetFileName(files[i].Name);
-                item.Click += new EventHandler(wp_ItemClick);
-               switchToolStripMenuItem.DropDownItems.Add(item);
-  			}
-		}
-		async void wp_ItemClick(object sender, EventArgs e)
-        { 
-            ToolStripItem item = (ToolStripItem)sender; 
-			closeProc("mpv"); 
-			await Task.Delay(50);	
-			Process.Start("mpv.exe ", " ./wallpaper/"+item.Text);
-			File.WriteAllText(Directory.GetCurrentDirectory()+"\\mpv\\wp.txt",item.Text);
-			//	Thread.Sleep(1000);
-			await Task.Delay(1000);
-			this.play();
-             
-        }
-		private  void play()
+		private void play()
 		{
 			this.Init();
-			IntPtr hwnd = Win32.FindWindow("mpv", null);
+			IntPtr hwnd = Win32.FindWindow("SDL_app", null);
 			IntPtr hwnd2 = Win32.FindWindow("ConsoleWindowClass", null);
 			Win32.ShowWindow(hwnd2, 0);
-			
 			Win32.SetParent(hwnd, this.programIntPtr);
-			
 		}
-//		protected override CreateParams CreateParams
-//        {
-//            get
-//            {
-//                const int WS_EX_APPWINDOW = 0x40000;
-//                const int WS_EX_TOOLWINDOW = 0x80;
-//                CreateParams cp = base.CreateParams;
-//                cp.ExStyle &= (~WS_EX_APPWINDOW);    // 不显示在TaskBar
-//                cp.ExStyle |= WS_EX_TOOLWINDOW;      // 不显示在Alt-Tab
-//                return cp;
-//            }
-//        }
 		public void Init()
 	    {
 	        // 通过类名查找一个窗口，返回窗口句柄。
@@ -150,33 +92,12 @@ namespace WPE
 		void ExitToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			//找到控制台窗口
-	       IntPtr hwnd = Win32.FindWindow("mpv", null);
-			Win32.SendMessage( hwnd, WM_CLOSE, 0, 0);
-			
-			closeProc("mpv");
+	        IntPtr cmdIntPtr = Win32.FindWindow("ConsoleWindowClass", null);
+			Win32.SendMessage(cmdIntPtr, WM_CLOSE, 0, 0);
+		 
 			this.Close();
 		}
 		
-		private bool closeProc(string ProcName)
-{
-    bool result = false;
-    System.Collections.ArrayList procList = new System.Collections.ArrayList();
-    string tempName = "";
-
-    foreach (System.Diagnostics.Process thisProc in System.Diagnostics.Process.GetProcesses())
-    {
-        tempName = thisProc.ProcessName;
-        procList.Add(tempName);
-        if (tempName == ProcName)
-        {
-            if (!thisProc.CloseMainWindow())
-　　　　　　　　thisProc.Kill(); //当发送关闭窗口命令无效时强行结束进程                    
-              result = true;
-        }
-     }
-     return result;
-}
-
 		void Button1Click(object sender, EventArgs e)
 		{
 				// 初始化桌面窗口
@@ -218,7 +139,7 @@ namespace WPE
 		void MainFormFormClosing(object sender, FormClosingEventArgs e)
 		{
 			//找到控制台窗口
-	        IntPtr cmdIntPtr = Win32.FindWindow("mpv", null);
+	        IntPtr cmdIntPtr = Win32.FindWindow("ConsoleWindowClass", null);
 			Win32.SendMessage(cmdIntPtr, WM_CLOSE, 0, 0);
 		 
 			 
@@ -302,48 +223,12 @@ namespace WPE
 		}
 		void AboutToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			MessageBox.Show("小风车\n作者：吃爆米花的小熊");
+			MessageBox.Show("小风车 ver1.0\n作者：吃爆米花的小熊");
 		}
 		void DonateToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			Process.Start("https://afdian.net/a/ifwz1729");
-		}
-		void SiteToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			Process.Start("https://meta.appinn.net/t/topic/40295/2");
-		}
-		
-		
-		//自启动
-		private static void CreateShortcut(string lnkFilePath, string args = "")
-		{
-		    var shellType = Type.GetTypeFromProgID("WScript.Shell");
-		    dynamic shell = Activator.CreateInstance(shellType);
-		    var shortcut = shell.CreateShortcut(lnkFilePath);
-		    shortcut.TargetPath = Assembly.GetEntryAssembly().Location;
-		    shortcut.Arguments = args;
-		    shortcut.WorkingDirectory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-		    shortcut.Save();
-		}
-		void AutostartToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			AutoRun();
-		}
-		public async void AutoRun(){
-			 CreateShortcut(Directory.GetCurrentDirectory()+"\\小风车.lnk");
-			 await Task.Delay(125);
-			string StartupPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Startup);
-			if(!File.Exists(StartupPath+@"\小风车.lnk")){
-			File.Move(Directory.GetCurrentDirectory()+@"\小风车.lnk",StartupPath+@"\小风车.lnk");
-			MessageBox.Show("小风车已设置为自启动");
-			}
-		}
-		void MainFormLoad(object sender, EventArgs e)
-		{
-	
+			Process.Start("https://partme.com/xiaoxiong");
 		}
 		//----------------------
-		
-		
 	}
 }

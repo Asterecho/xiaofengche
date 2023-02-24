@@ -40,10 +40,6 @@ namespace WPE
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.siteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.switchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.autostartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,59 +57,30 @@ namespace WPE
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.siteToolStripMenuItem,
-			this.switchToolStripMenuItem,
-			this.toolStripSeparator1,
-			this.autostartToolStripMenuItem,
 			this.donateToolStripMenuItem,
 			this.aboutToolStripMenuItem,
 			this.exitToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(125, 142);
-			// 
-			// siteToolStripMenuItem
-			// 
-			this.siteToolStripMenuItem.Name = "siteToolStripMenuItem";
-			this.siteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-			this.siteToolStripMenuItem.Text = "官网";
-			this.siteToolStripMenuItem.Click += new System.EventHandler(this.SiteToolStripMenuItemClick);
-			// 
-			// switchToolStripMenuItem
-			// 
-			this.switchToolStripMenuItem.Name = "switchToolStripMenuItem";
-			this.switchToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-			this.switchToolStripMenuItem.Text = "切换壁纸";
-			// 
-			// toolStripSeparator1
-			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
-			// 
-			// autostartToolStripMenuItem
-			// 
-			this.autostartToolStripMenuItem.Name = "autostartToolStripMenuItem";
-			this.autostartToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-			this.autostartToolStripMenuItem.Text = "开机自启";
-			this.autostartToolStripMenuItem.Click += new System.EventHandler(this.AutostartToolStripMenuItemClick);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(101, 70);
 			// 
 			// donateToolStripMenuItem
 			// 
 			this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-			this.donateToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+			this.donateToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
 			this.donateToolStripMenuItem.Text = "捐助";
 			this.donateToolStripMenuItem.Click += new System.EventHandler(this.DonateToolStripMenuItemClick);
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
 			this.aboutToolStripMenuItem.Text = "关于";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItemClick);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
 			this.exitToolStripMenuItem.Text = "退出";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
 			// 
@@ -147,7 +114,6 @@ namespace WPE
 			this.Text = "WPE";
 			this.TopMost = true;
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormFormClosing);
-			this.Load += new System.EventHandler(this.MainFormLoad);
 			this.Resize += new System.EventHandler(this.MainFormResize);
 			this.contextMenuStrip1.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -160,9 +126,5 @@ namespace WPE
 		private System.Windows.Forms.Timer timer1;
 		private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem siteToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem switchToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-		private System.Windows.Forms.ToolStripMenuItem autostartToolStripMenuItem;
 	}
 }
